@@ -1,0 +1,13 @@
+.cardBody {
+  padding: 1rem 0;
+}
+
+.table {
+  margin: 1rem;
+}
+
+@media (min-width: 40em) {
+  .cardBody {
+    padding: 1rem 1rem;
+  }
+}
