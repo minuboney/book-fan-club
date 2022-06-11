@@ -10,10 +10,10 @@ import { UserContext } from '../components/Interface';
 import withProtectRoute from '../hoc/withProtectRoute';
 
 const Users: NextPage = () => {
-  const { state } = React.useContext(UserContext);
+  const { role } = React.useContext(UserContext);
   return (
     <Fragment>
-      {state && (
+      {role && (
         <div className={styles.container}>
           <Head>
             <title>User Management System</title>
@@ -27,7 +27,7 @@ const Users: NextPage = () => {
               <Link href="/">Dashboard</Link> / Users
             </p>
             <div className={styles.grid}>
-              state:{state}
+              state:{role}
               <UserManagement />
             </div>
           </main>

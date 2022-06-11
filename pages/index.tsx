@@ -24,7 +24,7 @@ const OPTIONS = [
 ];
 
 const Home: NextPage = () => {
-  const { state, update } = React.useContext(UserContext);
+  const { role, update } = React.useContext(UserContext);
   const [checked, setCheckBoxChecked] = React.useState(false);
 
   const Roles: FC<RoleProps> = (props): JSX.Element => {
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <Link href="/">ABC Book Club</Link>
         </h1>
-        <div>Name: {state}</div>
+        <div>Name: {role}</div>
         <div className={styles.grid}>
           <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>

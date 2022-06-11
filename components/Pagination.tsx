@@ -7,32 +7,58 @@ interface PageProps {
   count: any;
   rowsPerPage: any;
   totalPages: any;
-  setActivePage: any;
+  dispatch: any;
 }
 
 export const Pagination: FC<PageProps> = (props): JSX.Element => {
-  const { activePage, count, rowsPerPage, totalPages, setActivePage } = { ...props };
+  const { activePage, count, rowsPerPage, totalPages, dispatch } = { ...props };
   const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
 
   return (
     <>
       <div className="pagination">
-        <button disabled={activePage === 1} onClick={() => setActivePage(1)}>
+        <button
+          disabled={activePage === 1}
+          onClick={() => {
+            return dispatch({
+              type: 'SET_ACTIVE_PAGE',
+              value: 1,
+            });
+          }}
+        >
           ⏮️ First
         </button>
-        <button disabled={activePage === 1} onClick={() => setActivePage(activePage - 1)}>
+        <button
+          disabled={activePage === 1}
+          onClick={() => {
+            return dispatch({
+              type: 'SET_ACTIVE_PAGE',
+              value: 1,
+            });
+          }}
+        >
           ⬅️ Previous
         </button>
         <button
           disabled={activePage === totalPages}
-          onClick={() => setActivePage(activePage + 1)}
+          onClick={() => {
+            return dispatch({
+              type: 'SET_ACTIVE_PAGE',
+              value: activePage + 1,
+            });
+          }}
         >
           Next ➡️
         </button>
         <button
           disabled={activePage === totalPages}
-          onClick={() => setActivePage(totalPages)}
+          onClick={() => {
+            return dispatch({
+              type: 'SET_ACTIVE_PAGE',
+              value: totalPages,
+            });
+          }}
         >
           Last ⏭️
         </button>

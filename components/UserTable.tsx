@@ -35,7 +35,7 @@ const UserTable: FC<TableProps> = (props): JSX.Element => {
   } = {
     ...props,
   };
-
+  console.log(calculatedRows, 'calculatedRows---');
   return (
     <Table striped bordered hover variant="dark" className="mt-3">
       <thead>
@@ -44,9 +44,9 @@ const UserTable: FC<TableProps> = (props): JSX.Element => {
             const sortIcon = () => {
               if (column.accessor === sort.orderBy) {
                 if (sort.order === 'asc') {
-                  return '⬆️';
+                  return ' ▴';
                 }
-                return '⬇️';
+                return ' ▾';
               } else {
                 return '️↕️';
               }

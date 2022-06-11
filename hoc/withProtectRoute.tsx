@@ -11,13 +11,13 @@ const withProtectRoute = (ChildComp: React.ComponentType<any | string>) => {
     */
   const WrappedComponent = (props: any) => {
     const router = useRouter();
-    const { state } = React.useContext(UserContext);
+    const { role } = React.useContext(UserContext);
 
     useEffect(() => {
-      if (!state) {
+      if (!role) {
         router.push('/');
       }
-    }, [state, router]);
+    }, [role, router]);
     // At this point, the props being passed in are the original props the component expects.
     return <ChildComp {...props} />;
   };
