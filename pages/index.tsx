@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import Link from 'next/link';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -8,8 +9,47 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContext } from '../components/Interface';
+
+interface RoleProps {
+  options: any;
+  checked: boolean;
+  onChange: any;
+  section: string;
+}
+const OPTIONS = [
+  { label: 'Admin', value: 1 },
+  { label: 'Editor', value: 2 },
+  { label: 'Member', value: 3 },
+];
 
 const Home: NextPage = () => {
+  const { state, update } = React.useContext(UserContext);
+  const [checked, setCheckBoxChecked] = React.useState(false);
+
+  const Roles: FC<RoleProps> = (props): JSX.Element => {
+    const arrSize = props.section === 'users' ? props.options.slice(0, 2) : props.options;
+    return (
+      <div>
+        {arrSize instanceof Array &&
+          arrSize.map((option, i) => (
+            <InputGroup className="mb-3 mt-4" key={i}>
+              <Form.Check
+                type="checkbox"
+                value={option.value}
+                checked={option.value === props.checked}
+                onChange={() => {
+                  props.onChange(option.value);
+                  update(option.value);
+                }}
+                label={option.label}
+              />
+            </InputGroup>
+          ))}
+      </div>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +62,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <Link href="/">ABC Book Club</Link>
         </h1>
-
+        <div>Name: {state}</div>
         <div className={styles.grid}>
           <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>
@@ -39,25 +79,26 @@ const Home: NextPage = () => {
               <Col sm={2}>
                 <Tab.Content className="mt-4">
                   <Tab.Pane eventKey="first">
-                    <InputGroup className="mb-3 mt-4">
-                      <Form.Check type="checkbox" label="Admin" />
-                    </InputGroup>
-                    <InputGroup className="mb-3 mt-4">
-                      <Form.Check type="checkbox" label="Editor" />
-                    </InputGroup>
-                    <Button variant="success">Login</Button>
+                    <Roles
+                      options={OPTIONS}
+                      onChange={(value: any) => setCheckBoxChecked(value)}
+                      checked={checked}
+                      section="users"
+                    />
+                    <Link href="/users">
+                      <Button variant="success">Login</Button>
+                    </Link>
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
-                    <InputGroup className="mb-3 mt-4">
-                      <Form.Check type="checkbox" label="Admin" />
-                    </InputGroup>
-                    <InputGroup className="mb-3 mt-4">
-                      <Form.Check type="checkbox" label="Editor" />
-                    </InputGroup>
-                    <InputGroup className="mb-3 mt-4">
-                      <Form.Check type="checkbox" label="Member" />
-                    </InputGroup>
-                    <Button variant="success">Login</Button>
+                    <Roles
+                      options={OPTIONS}
+                      onChange={(value: any) => setCheckBoxChecked(value)}
+                      checked={checked}
+                      section="books"
+                    />
+                    <Link href="/books">
+                      <Button variant="success">Login</Button>
+                    </Link>
                   </Tab.Pane>
                 </Tab.Content>
               </Col>

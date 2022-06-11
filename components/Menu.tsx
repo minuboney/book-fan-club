@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import { FaPencilAlt, FaPlus, FaTrashAlt } from 'react-icons/fa';
-import { User } from './Interface';
+import { User, UserContext } from './Interface';
 import styles from './Menu.module.css';
 
 export const Menu = () => {
@@ -31,6 +31,8 @@ export const Menu = () => {
   const [show, setShow] = useState(false);
   const [newUser, setNewUser] = useState(initCurrentUser);
   const [editing, setEdit] = useState(false);
+  const { state } = React.useContext(UserContext);
+  const disabled = state !== 1;
 
   const handleClose = () => {
     setShow(false);
@@ -89,7 +91,12 @@ export const Menu = () => {
                   <Card.Title>User Data</Card.Title>
                 </div>
                 <div className="d-flex">
-                  <Button variant="primary" onClick={handleShow} title="Add User">
+                  <Button
+                    variant="primary"
+                    onClick={handleShow}
+                    title="Add User"
+                    disabled={disabled}
+                  >
                     <FaPlus />
                   </Button>
                 </div>
@@ -116,6 +123,7 @@ export const Menu = () => {
                           <Button
                             variant="info"
                             title="Edit user details"
+                            disabled={disabled}
                             onClick={() => onEdit(user)}
                           >
                             <FaPencilAlt />
@@ -123,6 +131,7 @@ export const Menu = () => {
                           <Button
                             variant="danger"
                             title="Delete user"
+                            disabled={disabled}
                             onClick={() => onDeleteUser(user)}
                           >
                             <FaTrashAlt />
