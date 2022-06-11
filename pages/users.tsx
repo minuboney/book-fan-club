@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Menu } from '../components/Menu';
+import { UserManagement } from '../components/UserManagement';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserContext } from '../components/Interface';
 import withProtectRoute from '../hoc/withProtectRoute';
@@ -28,7 +28,7 @@ const Users: NextPage = () => {
             </p>
             <div className={styles.grid}>
               state:{state}
-              <Menu></Menu>
+              <UserManagement />
             </div>
           </main>
 
