@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { UserContext } from '../components/Interface';
+import { RoleContext } from '../components/Interface';
 
 interface RoleProps {
   options: any;
@@ -24,7 +24,7 @@ const OPTIONS = [
 ];
 
 const Home: NextPage = () => {
-  const { role, update } = React.useContext(UserContext);
+  const { update } = React.useContext(RoleContext);
   const [checked, setCheckBoxChecked] = React.useState(false);
 
   const Roles: FC<RoleProps> = (props): JSX.Element => {
@@ -62,9 +62,9 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <Link href="/">ABC Book Club</Link>
         </h1>
-        <div>Name: {role}</div>
-        <p>
-          <Link href="/analytics">Analytics of books by Genre and year published</Link>
+        <p className="pt-4">
+          Click <Link href="/analytics">here</Link> to view the analytics of books by
+          Genre and year published.
         </p>
 
         <div className={styles.grid}>

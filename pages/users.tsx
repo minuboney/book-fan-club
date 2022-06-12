@@ -4,13 +4,13 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { UserManagement } from '../components/UserManagement';
+import { UserManagement } from '../components/Users/UserManagement';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { UserContext } from '../components/Interface';
+import { RoleContext } from '../components/Interface';
 import withProtectRoute from '../hoc/withProtectRoute';
 
 const Users: NextPage = () => {
-  const { role } = React.useContext(UserContext);
+  const { role } = React.useContext(RoleContext);
   return (
     <Fragment>
       {role && (
@@ -23,11 +23,10 @@ const Users: NextPage = () => {
 
           <main className={styles.main}>
             <h1 className={styles.title}>User Management System</h1>
-            <p className="mt-3">
+            <p className="mt-4">
               <Link href="/">Dashboard</Link> / Users
             </p>
             <div className={styles.grid}>
-              state:{role}
               <UserManagement />
             </div>
           </main>

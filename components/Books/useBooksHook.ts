@@ -1,17 +1,17 @@
 import React, { useReducer, useEffect, useMemo } from 'react';
-import { User, UserContext } from './Interface';
-import { sortRows, filterRows, paginateRows } from './helpers';
-import { initCurrentUser, initialState, reducer } from './userUtils';
+import { Book, RoleContext } from '../Interface';
+import { sortRows, filterRows, paginateRows } from '../helpers';
+import { initCurrentBook, initialState, reducer } from './bookUtils';
 
-const useUsersHook = () => {
+const useBooksHook = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { role } = React.useContext(UserContext);
-  const disabled = role !== 1;
+  const { role } = React.useContext(RoleContext);
+  const disabled = role === 3;
 
   const rowsPerPage = 3;
   const filteredRows = useMemo(
-    () => filterRows(state.users, state.filters),
-    [state.users, state.filters]
+    () => filterRows(state.books, state.filters),
+    [state.books, state.filters]
   );
   const sortedRows = useMemo(
     () => sortRows(filteredRows, state.sort),
@@ -30,45 +30,52 @@ const useUsersHook = () => {
       });
       if (!state.editing) {
         dispatch({
-          type: 'ADD_USER',
-          value: initCurrentUser,
+          type: 'ADD_BOOK',
+          value: initCurrentBook,
         });
       }
     },
-    onFormSubmit: (newUser: any) => {
-      const id = state.users.length + 1;
+    onFormSubmit: (newBook: any) => {
+      const id = state.books.length + 1;
       dispatch({
-        type: 'SET_USERS',
-        value: [...state.users, { ...newUser, id }],
+        type: 'SET_BOOKS',
+        value: [...state.books, { ...newBook, id }],
       });
     },
-    onEdit: (newUser: any) => {
+    onEdit: (newBook: any) => {
       dispatch({
-        type: 'EDIT_USER',
-        value: { ...newUser, newUser },
+        type: 'EDIT_BOOK',
+        value: { ...newBook, newBook },
       });
     },
-    onSubmit: (newUser: any) => {
+    onStatusUpdate: (newBook: any) => {
+      newBook.availability = !newBook.availability;
+      dispatch({
+        type: 'SET_AVAILABILITY_STATUS',
+        value: { ...newBook, newBook },
+      });
+    },
+    onSubmit: (newBook: any) => {
       if (state.editing) {
-        mapDispatch.onUpdateUser(newUser);
+        mapDispatch.onUpdateBook(newBook);
       } else {
-        mapDispatch.onFormSubmit(newUser);
+        mapDispatch.onFormSubmit(newBook);
       }
       dispatch({
         type: 'CLOSE_MODAL',
       });
     },
-    onUpdateUser: (newUser: User) => {
-      let id = newUser.id;
+    onUpdateBook: (newBook: Book) => {
+      let id = newBook.id;
       dispatch({
-        type: 'SET_USERS_EDIT',
-        value: state.users.map((i: any) => (i.id === id ? newUser : i)),
+        type: 'SET_BOOKS_EDIT',
+        value: state.books.map((i: any) => (i.id === id ? newBook : i)),
       });
     },
-    onDeleteUser: (currentUser: User) => {
+    onDeleteBook: (currentBook: Book) => {
       dispatch({
-        type: 'SET_USERS',
-        value: state.users.filter((i: any) => i.id !== currentUser.id),
+        type: 'SET_BOOKS',
+        value: state.books.filter((i: any) => i.id !== currentBook.id),
       });
     },
     handleSearch: (value: any, accessor: any) => {
@@ -124,4 +131,4 @@ const useUsersHook = () => {
   return [state, mapDispatch];
 };
 
-export default useUsersHook;
+export default useBooksHook;

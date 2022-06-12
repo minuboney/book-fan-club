@@ -22,7 +22,6 @@ export function isNil(value: any) {
 
 export function isDateString(value: any) {
   if (!isString(value)) return false;
-  console.log(value, 'value---');
   return value.match(/^\d{2}-\d{2}-\d{4}$/);
 }
 

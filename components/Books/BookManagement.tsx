@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
-import styles from './UserManagement.module.css';
-import { Pagination } from './Pagination';
-import Dialog from './Dialog';
-import UserTable from './UserTable';
-import useUsersHook from './useUsersHook';
+import styles from '../Table.module.css';
+import { Pagination } from '../Pagination';
+import Dialog from './BookDialog';
+import BookTable from './BookTable';
+import useBooksHook from './useBooksHook';
 
-export const UserManagement = () => {
-  const [state, dispatch] = useUsersHook();
+export const BookManagement = () => {
+  const [state, dispatch] = useBooksHook();
 
   return (
     <Container fluid="md">
@@ -18,29 +18,30 @@ export const UserManagement = () => {
             <div className={styles.cardBody}>
               <div className="d-flex justify-content-between customCardBody px-2">
                 <div>
-                  <Card.Title>User Data</Card.Title>
+                  <Card.Title>Books Data</Card.Title>
                 </div>
                 <div className="d-flex">
                   <Button
                     variant="primary"
                     onClick={dispatch.handleShow}
-                    title="Add User"
+                    title="Add Book"
                     disabled={dispatch.disabled}
                   >
                     <FaPlus />
                   </Button>
                 </div>
               </div>
-              <UserTable
+              <BookTable
                 handleSort={dispatch.handleSort}
                 sort={state.sort}
                 filters={state.filters}
                 handleSearch={dispatch.handleSearch}
                 calculatedRows={dispatch.calculatedRows}
-                users={state.users}
+                books={state.books}
                 disabled={dispatch.disabled}
                 onEdit={dispatch.onEdit}
-                onDeleteUser={dispatch.onDeleteUser}
+                onStatusUpdate={dispatch.onStatusUpdate}
+                onDeleteBook={dispatch.onDeleteBook}
               />
               {dispatch.count > 0 ? (
                 <Pagination
@@ -58,30 +59,13 @@ export const UserManagement = () => {
           <Dialog
             show={state.show}
             onHide={dispatch.handleClose}
-            newUser={state.newUser}
+            newBook={state.newBook}
             editing={state.editing}
             onSubmit={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.preventDefault();
-              dispatch.onSubmit(state.newUser);
+              dispatch.onSubmit(state.newBook);
             }}
-            onNameChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, name: e.target.value },
-              });
-            }}
-            onRoleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, role: e.target.value },
-              });
-            }}
-            onDateChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, dateJoined: e.target.value },
-              });
-            }}
+            dispatch={dispatch.parentDispatch}
           />
         </Col>
       </Row>

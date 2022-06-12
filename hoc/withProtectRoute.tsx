@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { UserContext } from '../components/Interface';
+import { RoleContext } from '../components/Interface';
 
 const withProtectRoute = (ChildComp: React.ComponentType<any | string>) => {
   /*
@@ -11,7 +11,7 @@ const withProtectRoute = (ChildComp: React.ComponentType<any | string>) => {
     */
   const WrappedComponent = (props: any) => {
     const router = useRouter();
-    const { role } = React.useContext(UserContext);
+    const { role } = React.useContext(RoleContext);
 
     useEffect(() => {
       if (!role) {

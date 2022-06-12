@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { UserManagement } from '../components/UserManagement';
+import { BookManagement } from '../components/Books/BookManagement';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Books: NextPage = () => {
@@ -17,11 +17,11 @@ const Books: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Book Management System</h1>
-        <p>
+        <p className="pt-4">
           <Link href="/">Dashboard</Link> / Books
         </p>
         <div className={styles.grid}>
-          <UserManagement />
+          <BookManagement />
         </div>
       </main>
 

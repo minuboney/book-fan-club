@@ -35,7 +35,7 @@ const UserTable: FC<TableProps> = (props): JSX.Element => {
   } = {
     ...props,
   };
-  console.log(calculatedRows, 'calculatedRows---');
+
   return (
     <Table striped bordered hover variant="dark" className="mt-3">
       <thead>

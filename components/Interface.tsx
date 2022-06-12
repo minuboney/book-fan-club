@@ -7,6 +7,16 @@ export interface BaseUser {
 export interface User extends BaseUser {
   id: number;
 }
+export interface BaseBook {
+  title: string;
+  description: string;
+  genre: string;
+  year: string;
+  availability: boolean;
+}
+export interface Book extends BaseBook {
+  id: number;
+}
 
 export function createCtx<A>(defaultValue: A) {
   type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>;
@@ -21,5 +31,5 @@ export function createCtx<A>(defaultValue: A) {
   }
   return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
 }
-const [UserContext, UserProvider] = createCtx(0);
-export { UserContext, UserProvider };
+const [RoleContext, RoleProvider] = createCtx(0);
+export { RoleContext, RoleProvider };

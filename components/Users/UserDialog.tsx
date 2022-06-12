@@ -12,7 +12,7 @@ interface DialogProps {
   onDateChange: any;
 }
 
-const Dialog: FC<DialogProps> = (props): JSX.Element => {
+const UserDialog: FC<DialogProps> = (props): JSX.Element => {
   const {
     show,
     onHide,
@@ -85,4 +85,4 @@ const Dialog: FC<DialogProps> = (props): JSX.Element => {
   );
 };
 
-export default Dialog;
+export default UserDialog;
