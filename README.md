@@ -12,11 +12,25 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Details of this Project:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+In this project, I have used Next.js because it has built-in file system routing and typescript support. It also has many powerful features such as fast refresh.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+I have used createContext, useContext hook to access the role state throughout the pages.
+
+I have used higher order components(hoc) to give role privileges. To achieve this, I have used the withProtectRoute component. You can see, users and books are wrapped using this hoc. Hence, those pages cannot be accessed without login.
+
+For styling I have used react bootstrap. I used the same for table styling.
+
+For the Analytics page, I used package `victory` to create charts.
+
+For making the code neat and clean, I have used custom hooks. It is mainly using the useReducer hook.
+
+For optimising the filter and sort, I have used the useMemo hook.
+
+I have also created smaller components for better readability and for reusing it.
+
+I have deployed this project using Vercel and the url is https://book-fan-club.vercel.app
 
 ## Learn More
 
