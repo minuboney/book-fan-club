@@ -29,7 +29,7 @@ export function createCtx<A>(defaultValue: A) {
     const [role, update] = React.useState(defaultValue);
     return <ctx.Provider value={{ role, update }} {...props} />;
   }
-  return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
+  return [ctx, Provider] as const;
 }
 const [RoleContext, RoleProvider] = createCtx(0);
 export { RoleContext, RoleProvider };

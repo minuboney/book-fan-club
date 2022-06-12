@@ -2,27 +2,16 @@ import React, { FC } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
 interface DialogProps {
-  show: any;
+  show: boolean;
   onHide: any;
   newUser: any;
   editing: boolean;
   onSubmit: any;
-  onNameChange: any;
-  onRoleChange: any;
-  onDateChange: any;
+  dispatch: any;
 }
 
 const UserDialog: FC<DialogProps> = (props): JSX.Element => {
-  const {
-    show,
-    onHide,
-    newUser,
-    editing,
-    onSubmit,
-    onNameChange,
-    onRoleChange,
-    onDateChange,
-  } = {
+  const { show, onHide, newUser, editing, onSubmit, dispatch } = {
     ...props,
   };
 
@@ -43,7 +32,12 @@ const UserDialog: FC<DialogProps> = (props): JSX.Element => {
               type="text"
               value={newUser.name}
               required
-              onChange={onNameChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                return dispatch({
+                  type: 'ADD_USER',
+                  value: { ...newUser, name: e.target.value },
+                });
+              }}
               placeholder="Enter Name"
             />
           </Form.Group>
@@ -52,7 +46,12 @@ const UserDialog: FC<DialogProps> = (props): JSX.Element => {
             <Form.Control
               type="text"
               value={newUser.role}
-              onChange={onRoleChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                return dispatch({
+                  type: 'ADD_USER',
+                  value: { ...newUser, role: e.target.value },
+                });
+              }}
               placeholder="Enter Role"
             />
           </Form.Group>
@@ -61,7 +60,12 @@ const UserDialog: FC<DialogProps> = (props): JSX.Element => {
             <Form.Control
               type="date"
               value={newUser.dateJoined}
-              onChange={onDateChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                return dispatch({
+                  type: 'ADD_USER',
+                  value: { ...newUser, dateJoined: e.target.value },
+                });
+              }}
               placeholder="Enter Date Joined"
             />
           </Form.Group>

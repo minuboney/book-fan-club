@@ -1,12 +1,9 @@
 import React, { FC } from 'react';
-
-/* eslint-disable jsx-a11y/accessible-emoji */
-
 interface PageProps {
-  activePage: any;
-  count: any;
-  rowsPerPage: any;
-  totalPages: any;
+  activePage: number;
+  count: number;
+  rowsPerPage: number;
+  totalPages: number;
   dispatch: any;
 }
 

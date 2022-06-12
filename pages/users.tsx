@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { UserManagement } from '../components/Users/UserManagement';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { RoleContext } from '../components/Interface';
 import withProtectRoute from '../hoc/withProtectRoute';
+import styles from '../styles/Home.module.css';
 
 const Users: NextPage = () => {
   const { role } = React.useContext(RoleContext);
@@ -15,12 +15,11 @@ const Users: NextPage = () => {
     <Fragment>
       {role && (
         <div className={styles.container}>
-          <Head>
-            <title>User Management System</title>
-            <meta name="abc book club" content="abc book club" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-
+          <Header
+            title="User Management System"
+            metaName="abc book club"
+            metaContent="abc book club"
+          />
           <main className={styles.main}>
             <h1 className={styles.title}>User Management System</h1>
             <p className="mt-4">
@@ -30,19 +29,7 @@ const Users: NextPage = () => {
               <UserManagement />
             </div>
           </main>
-
-          <footer className={styles.footer}>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Powered by{' '}
-              <span className={styles.logo}>
-                <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-              </span>
-            </a>
-          </footer>
+          <Footer />
         </div>
       )}
     </Fragment>

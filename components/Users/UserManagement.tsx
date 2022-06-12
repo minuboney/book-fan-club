@@ -64,24 +64,7 @@ export const UserManagement = () => {
               e.preventDefault();
               dispatch.onSubmit(state.newUser);
             }}
-            onNameChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, name: e.target.value },
-              });
-            }}
-            onRoleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, role: e.target.value },
-              });
-            }}
-            onDateChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              return dispatch.parentDispatch({
-                type: 'ADD_USER',
-                value: { ...state.newUser, dateJoined: e.target.value },
-              });
-            }}
+            dispatch={dispatch.parentDispatch}
           />
         </Col>
       </Row>

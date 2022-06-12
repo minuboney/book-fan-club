@@ -1,44 +1,40 @@
+import React, { Fragment } from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Head from 'next/head';
-import Image from 'next/image';
+
 import styles from '../styles/Home.module.css';
 import { BookManagement } from '../components/Books/BookManagement';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import withProtectRoute from '../hoc/withProtectRoute';
+import { RoleContext } from '../components/Interface';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Books: NextPage = () => {
+  const { role } = React.useContext(RoleContext);
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Book Management System</title>
-        <meta name="abc book club" content="abc book club" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Fragment>
+      {role && (
+        <div className={styles.container}>
+          <Header
+            title="Book Management System"
+            metaName="abc book club"
+            metaContent="abc book club"
+          />
+          <main className={styles.main}>
+            <h1 className={styles.title}>Welcome to Book Management System</h1>
+            <p className="pt-4">
+              <Link href="/">Dashboard</Link> / Books
+            </p>
+            <div className={styles.grid}>
+              <BookManagement />
+            </div>
+          </main>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Book Management System</h1>
-        <p className="pt-4">
-          <Link href="/">Dashboard</Link> / Books
-        </p>
-        <div className={styles.grid}>
-          <BookManagement />
+          <Footer />
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+      )}
+    </Fragment>
   );
 };
 
-export default Books;
+export default withProtectRoute(Books);

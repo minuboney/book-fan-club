@@ -9,7 +9,7 @@ const withProtectRoute = (ChildComp: React.ComponentType<any | string>) => {
     Hence, pages using withProtectRoute should consider doing client-side
     fetch to get the page data.
     */
-  const WrappedComponent = (props: any) => {
+  const WrappedComponent = (props: React.ComponentType<any | string>) => {
     const router = useRouter();
     const { role } = React.useContext(RoleContext);
 

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
 interface DialogProps {
-  show: any;
+  show: boolean;
   onHide: any;
   newBook: any;
   editing: boolean;

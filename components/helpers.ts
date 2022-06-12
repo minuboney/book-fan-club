@@ -1,18 +1,16 @@
-/* eslint-disable eqeqeq */
-
 export function isEmpty(obj = {}) {
   return Object.keys(obj).length === 0;
 }
 
-export function isString(value: any) {
-  return typeof value === 'string' || value instanceof String;
+export function isString(value: string) {
+  return typeof value === 'string';
 }
 
-export function isNumber(value: any) {
+export function isNumber(value: number) {
   return typeof value == 'number' && !isNaN(value);
 }
 
-export function isBoolean(value: any) {
+export function isBoolean(value: boolean) {
   return value === true || value === false;
 }
 
@@ -20,7 +18,7 @@ export function isNil(value: any) {
   return typeof value === 'undefined' || value === null;
 }
 
-export function isDateString(value: any) {
+export function isDateString(value: string) {
   if (!isString(value)) return false;
   return value.match(/^\d{2}-\d{2}-\d{4}$/);
 }
@@ -29,7 +27,7 @@ export function convertDateString(value: any) {
   return value.substr(6, 4) + value.substr(3, 2) + value.substr(0, 2);
 }
 
-export function toLower(value: any) {
+export function toLower(value: string) {
   if (isString(value)) {
     return value.toLowerCase();
   }

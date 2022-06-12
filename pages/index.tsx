@@ -1,20 +1,22 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
 import { Nav, Tab, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { RoleContext } from '../components/Interface';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { RoleContext } from '../components/Interface';
+import styles from '../styles/Home.module.css';
 interface RoleProps {
-  options: any;
+  options: {
+    label: string;
+    value: number;
+  }[];
   checked: boolean;
-  onChange: any;
+  onChange: (text: number) => void;
   section: string;
 }
 const OPTIONS = [
@@ -37,7 +39,7 @@ const Home: NextPage = () => {
               <Form.Check
                 type="checkbox"
                 value={option.value}
-                checked={option.value === props.checked}
+                checked={option.value === Number(props.checked)}
                 onChange={() => {
                   props.onChange(option.value);
                   update(option.value);
@@ -52,12 +54,11 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create ABC Book club</title>
-        <meta name="abc book club" content="abc book club" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <Header
+        title="Create ABC Book club"
+        metaName="abc book club"
+        metaContent="abc book club"
+      />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <Link href="/">ABC Book Club</Link>
@@ -110,19 +111,7 @@ const Home: NextPage = () => {
           </Tab.Container>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };
