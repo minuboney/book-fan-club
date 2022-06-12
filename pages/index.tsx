@@ -63,6 +63,10 @@ const Home: NextPage = () => {
           Welcome to <Link href="/">ABC Book Club</Link>
         </h1>
         <div>Name: {role}</div>
+        <p>
+          <Link href="/analytics">Analytics of books by Genre and year published</Link>
+        </p>
+
         <div className={styles.grid}>
           <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>
